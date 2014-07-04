@@ -23,6 +23,11 @@ isAbsoluteUrl('foo/bar');
 ```
 
 
+## Related
+
+See [is-relative-url](https://github.com/sindresorhus/is-relative-url) for the inverse.
+
+
 ## License
 
 MIT © [Sindre Sorhus](http://sindresorhus.com)
