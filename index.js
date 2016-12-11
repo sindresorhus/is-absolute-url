@@ -4,5 +4,5 @@ module.exports = function (url) {
 		throw new TypeError('Expected a string');
 	}
 
-	return /^(?:\w+:)\/\//.test(url);
+	return /^[a-z][a-z0-9+.-]*:/.test(url);
 };
