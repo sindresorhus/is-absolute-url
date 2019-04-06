@@ -5,7 +5,7 @@
 
 ## Install
 
-```sh
+```
 $ npm install is-absolute-url
 ```
 
@@ -15,7 +15,7 @@ $ npm install is-absolute-url
 ```js
 const isAbsoluteUrl = require('is-absolute-url');
 
-isAbsoluteUrl('http://sindresorhus.com/foo/bar');
+isAbsoluteUrl('https://sindresorhus.com/foo/bar');
 //=> true
 
 isAbsoluteUrl('//sindresorhus.com');
@@ -33,4 +33,4 @@ See [is-relative-url](https://github.com/sindresorhus/is-relative-url) for the i
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)
