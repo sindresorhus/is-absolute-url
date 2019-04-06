@@ -6,14 +6,14 @@
 ## Install
 
 ```sh
-$ npm install --save is-absolute-url
+$ npm install is-absolute-url
 ```
 
 
 ## Usage
 
 ```js
-var isAbsoluteUrl = require('is-absolute-url');
+const isAbsoluteUrl = require('is-absolute-url');
 
 isAbsoluteUrl('http://sindresorhus.com/foo/bar');
 //=> true

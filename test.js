@@ -1,15 +1,14 @@
-'use strict';
-var assert = require('assert');
-var isAbsoluteUrl = require('./');
+import test from 'ava';
+import isAbsoluteUrl from '.';
 
-it('should match absolute urls', function () {
-	assert(isAbsoluteUrl('http://sindresorhus.com'));
-	assert(isAbsoluteUrl('https://sindresorhus.com'));
-	assert(isAbsoluteUrl('file://sindresorhus.com'));
-	assert(isAbsoluteUrl('mailto:someone@example.com'));
-	assert(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'));
-	assert(!isAbsoluteUrl('//sindresorhus.com'));
-	assert(!isAbsoluteUrl('/foo/bar'));
-	assert(!isAbsoluteUrl('foo/bar'));
-	assert(!isAbsoluteUrl('foo'));
+test('main', t => {
+	t.true(isAbsoluteUrl('http://sindresorhus.com'));
+	t.true(isAbsoluteUrl('https://sindresorhus.com'));
+	t.true(isAbsoluteUrl('file://sindresorhus.com'));
+	t.true(isAbsoluteUrl('mailto:someone@example.com'));
+	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'));
+	t.false(isAbsoluteUrl('//sindresorhus.com'));
+	t.false(isAbsoluteUrl('/foo/bar'));
+	t.false(isAbsoluteUrl('foo/bar'));
+	t.false(isAbsoluteUrl('foo'));
 });
