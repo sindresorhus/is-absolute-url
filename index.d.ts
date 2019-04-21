@@ -1,5 +1,5 @@
 /**
-Check if an URL is absolute.
+Check if a URL is absolute.
 
 @param url - The URL to check.
 

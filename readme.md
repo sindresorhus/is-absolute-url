@@ -1,6 +1,6 @@
 # is-absolute-url [![Build Status](https://travis-ci.org/sindresorhus/is-absolute-url.svg?branch=master)](https://travis-ci.org/sindresorhus/is-absolute-url)
 
-> Check if an URL is absolute
+> Check if a URL is absolute
 
 
 ## Install
