@@ -11,4 +11,7 @@ test('main', t => {
 	t.false(isAbsoluteUrl('/foo/bar'));
 	t.false(isAbsoluteUrl('foo/bar'));
 	t.false(isAbsoluteUrl('foo'));
+	t.false(isAbsoluteUrl('c:\\'));
+	t.false(isAbsoluteUrl('c:\\Dev\\test-broken'));
+	t.false(isAbsoluteUrl('C:\\Dev\\test-broken'));
 });
