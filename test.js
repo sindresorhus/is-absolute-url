@@ -3,7 +3,9 @@ import isAbsoluteUrl from '.';
 
 test('main', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com'));
+	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com'));
+	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('httpS://sindresorhus.com'));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: false}));
 	t.false(isAbsoluteUrl('file://sindresorhus.com'));
