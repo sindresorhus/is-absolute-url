@@ -35,8 +35,26 @@ isAbsoluteUrl('//sindresorhus.com');
 isAbsoluteUrl('foo/bar');
 //=> false
 ```
-
 By default only `http` and `https` links are validated.  If you wish to check absolute URLs of protocols other than `http` (for example, `ftp:`, `mailto:`), use `isAbsoluteUrl(mayBeURL, { httpOnly: false })`.
+
+## API
+
+### isAbsoluteUrl(url, options?)
+
+#### url
+
+Type: `string`
+`url` to be validated.
+
+#### options
+
+Type: `object`
+
+##### httpOnly
+
+Type: `boolean`
+
+`true` by default, set to `false` if the url does not use `http`/`https` protocol.
 
 ## Related
 
