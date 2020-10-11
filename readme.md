@@ -2,7 +2,7 @@
 
 > Check if a URL is absolute
 
-By default, it checks if the URL is of the `http` or `https` protocol.
+By default, it checks if the URL uses the `http` or `https` protocol.
 
 
 ## Install
