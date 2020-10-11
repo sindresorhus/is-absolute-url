@@ -26,7 +26,7 @@ isAbsoluteUrl('http://sindresorhus.com/foo/bar');
 isAbsoluteUrl('ftp://sindresorhus.com/foo/bar');
 //=> false
 
-isAbsoluteUrl('ftp://sindresorhus.com/foo/bar', { httpOnly: false });
+isAbsoluteUrl('ftp://sindresorhus.com/foo/bar', {httpOnly: false});
 //=> true
 
 isAbsoluteUrl('//sindresorhus.com');
