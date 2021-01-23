@@ -2,6 +2,8 @@
 
 > Check if a URL is absolute
 
+By default, it checks if the URL uses the `http` or `https` protocol.
+
 
 ## Install
 
@@ -18,6 +20,15 @@ const isAbsoluteUrl = require('is-absolute-url');
 isAbsoluteUrl('https://sindresorhus.com/foo/bar');
 //=> true
 
+isAbsoluteUrl('http://sindresorhus.com/foo/bar');
+//=> true
+
+isAbsoluteUrl('ftp://sindresorhus.com/foo/bar');
+//=> false
+
+isAbsoluteUrl('ftp://sindresorhus.com/foo/bar', {httpOnly: false});
+//=> true
+
 isAbsoluteUrl('//sindresorhus.com');
 //=> false
 
@@ -25,6 +36,28 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 
+By default only `http` and `https` links are validated.  If you wish to check absolute URLs of protocols other than `http` (for example, `ftp:`, `mailto:`), use `isAbsoluteUrl(mayBeURL, { httpOnly: false })`.
+
+## API
+
+### isAbsoluteUrl(url, options?)
+
+#### url
+
+Type: `string`
+
+The URL to be checked.
+
+#### options
+
+Type: `object`
+
+##### httpOnly
+
+Type: `boolean`\
+Default: `true`
+
+Set to `false` if the url does not use `http`/`https` protocol.
 
 ## Related
 
