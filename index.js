@@ -2,7 +2,7 @@
 
 // Options - httpOnly
 // - strictest 	> Everything accordingly to RFC 1738 -  Case sensititive
-// - strict 	> "Browser readable" -  https://tools.ietf.org/html/rfc1738
+// - strict 	> "Browser readable" - your browser should open this url
 // - loose/true > Checks the http protocol only
 
 module.exports = (url, options = {}) => {
