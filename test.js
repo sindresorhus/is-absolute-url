@@ -5,6 +5,7 @@ test('main', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com'));
 	t.true(isAbsoluteUrl('https://sindresorhus.com'));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com'));
+	t.true(isAbsoluteUrl('httpS://sindresorhus'));
 	t.true(isAbsoluteUrl('file://sindresorhus.com'));
 	t.true(isAbsoluteUrl('mailto:someone@example.com'));
 	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'));
@@ -23,6 +24,8 @@ test('HttpOnly as "strictest"', t => {
 	t.false(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: 'strictest'}));
 	t.false(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: 'strictest'}));
 	t.false(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'strictest'}));
+	// New test
+	t.false(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: 'strictest'}));
 	t.false(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'strictest'}));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: 'strictest'}));
 	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: 'strictest'}));
@@ -42,6 +45,8 @@ test('HttpOnly as "strict"', t => {
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: 'strict'}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: 'strict'}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'strict'}));
+	// New test
+	t.false(isAbsoluteUrl('httpS://sindresorhus', {httpOnly: 'strict'}));
 	t.false(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'strictest'}));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: 'strict'}));
 	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: 'strict'}));
@@ -60,6 +65,8 @@ test('HttpOnly as "loose"', t => {
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: 'loose'}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: 'loose'}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'loose'}));
+	// New test
+	t.true(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: 'loose'}));
 	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'loose'}));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: 'loose'}));
 	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: 'loose'}));
@@ -78,6 +85,8 @@ test('HttpOnly as \'true\'', t => {
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: true}));
+	// New test
+	t.true(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: true}));
 	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: true}));
@@ -97,6 +106,8 @@ test('httpOnly option set to false should have same behaviour has "main" tests',
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false}));
+	// New test
+	t.true(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: false}));
 	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: false}));
 	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: false}));
 	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: false}));
