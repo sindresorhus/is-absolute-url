@@ -16,4 +16,7 @@ test('main', t => {
 	t.false(isAbsoluteUrl('c:\\Dev\\test-broken'));
 	t.false(isAbsoluteUrl('C:\\Dev\\test-broken'));
 	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com'));
+	t.false(isAbsoluteUrl('http://sindresorhus.com', {
+		httpOnly: 'strict'
+	}));
 });
