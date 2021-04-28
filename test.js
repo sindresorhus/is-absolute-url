@@ -91,3 +91,54 @@ test('HttpOnly as \'true\'', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: true}));
 });
 
+test('httpOnly option set to false should have same behaviour has "main" tests', t => {
+	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: false}));
+	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: false}));
+	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: false}));
+	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: false}));
+	t.true(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false}));
+	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: false}));
+	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: false}));
+	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: false}));
+	t.false(isAbsoluteUrl('foo/bar', {httpOnly: false}));
+	t.false(isAbsoluteUrl('foo', {httpOnly: false}));
+	t.false(isAbsoluteUrl('c:\\', {httpOnly: false}));
+	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: false}));
+	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: false}));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', {httpOnly: false}));
+});
+
+test('Testing with different / weird props on Options object', t => {
+	t.true(isAbsoluteUrl('http://sindresorhus.com', {randomKey: false}));
+	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnlyxx: false}));
+	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOn: 2}));
+	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'true'}));
+	t.true(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false, safas: 2}));
+	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {null: false}));
+	t.false(isAbsoluteUrl('//sindresorhus.com', {}));
+	// XO doesn't allow to test it -> t.false(isAbsoluteUrl('/foo/bar', {httpOnly: true, httpOnly: false})); //
+	t.false(isAbsoluteUrl('foo/bar', {httpOnly: false}));
+	t.false(isAbsoluteUrl('foo', {httpOnly: false}));
+	// XO t.false(isAbsoluteUrl('c:\\', () => {console.log("hello!")} ));
+	// XO t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: () => {t.false(isAbsoluteUrl('c:\\Dev\\test-broken'))} }));
+	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: '"'}));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', [true, true]));
+});
+
+test('Just a confirmation that it also works with empty objects', t => {
+	t.true(isAbsoluteUrl('http://sindresorhus.com', {}));
+	t.true(isAbsoluteUrl('https://sindresorhus.com', {}));
+	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {}));
+	t.true(isAbsoluteUrl('file://sindresorhus.com', {}));
+	t.true(isAbsoluteUrl('mailto:someone@example.com', {}));
+	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {}));
+	t.false(isAbsoluteUrl('//sindresorhus.com', {}));
+	t.false(isAbsoluteUrl('/foo/bar', {}));
+	t.false(isAbsoluteUrl('foo/bar', {}));
+	t.false(isAbsoluteUrl('foo', {}));
+	t.false(isAbsoluteUrl('c:\\', {}));
+	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {}));
+	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {}));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', {}));
+});
+
