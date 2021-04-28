@@ -17,6 +17,6 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 */
-declare function isAbsoluteUrl(url: string): boolean;
+declare function isAbsoluteUrl(url: string, options: object): boolean;
 
 export = isAbsoluteUrl;
