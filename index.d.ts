@@ -18,7 +18,7 @@ isAbsoluteUrl('foo/bar');
 ```
 */
 interface Options {
-    greeting?: boolean | string;
+    httpOnly?: boolean | string;
   }
 
 declare function isAbsoluteUrl(url: string, options: Options): boolean;
