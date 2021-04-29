@@ -1,7 +1,7 @@
 /**
 Check if a URL is absolute.
-
 @param url - The URL to check.
+@param options - Object with different parameters to check.
 
 @example
 ```
@@ -17,6 +17,10 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 */
-declare function isAbsoluteUrl(url: string, options: object): boolean;
+interface Options {
+    greeting?: boolean | string;
+  }
+
+declare function isAbsoluteUrl(url: string, options: Options): boolean;
 
 export = isAbsoluteUrl;

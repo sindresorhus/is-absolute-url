@@ -29,13 +29,17 @@ isAbsoluteUrl('foo/bar');
 
 ### httpOnly
 
+You can pass an object as a second parameter.
+
 ```js
-isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'strict'});
+isAbsoluteUrl('https://si', { httpOnly: true });
 //=> true
 
-is absoluteUrl('mailto:someone@example.com', {httpOnly: 'strict'});
+is absoluteUrl('mailto:someone@example.com', { httpOnly: true });
 //=> false
-``
+```
+
+You can also set the `httpOnly` to `strictest` or `strict`. Check the tests for examples.
 
 ## Related
 
