@@ -1,9 +1,10 @@
 'use strict';
 
-// Options - httpOnly
-// - strictest 	> Everything accordingly to RFC 1738 -  Case sensititive
-// - strict 	> "Browser readable" - your browser should open this url
-// - loose/true > Checks the http protocol only
+// Options
+// - httpOnly
+// 	 - strictest	> Everything accordingly to RFC 1738 -  Case sensititive
+// 	 - strict		> "Browser readable" - your browser should open this url
+//	 - loose/true 	> Checks the http protocol header only
 
 module.exports = (url, options = {}) => {
 	if (typeof url !== 'string') {

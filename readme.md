@@ -25,6 +25,17 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 
+## Options
+
+### httpOnly
+
+```js
+isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'strict'});
+//=> true
+
+is absoluteUrl('mailto:someone@example.com', {httpOnly: 'strict'});
+//=> false
+``
 
 ## Related
 
