@@ -26,9 +26,11 @@ test('HttpOnly set as true (same as default behavior). Assert TRUE tests', t => 
 	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', true));
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', true));
 	t.true(isAbsoluteUrl('https://sindresorhus', true));	// Should this behavior exist? missing TLD?
+	t.true(isAbsoluteUrl('http://sin dresorhus.com', true));
 });
 
 test('HttpOnly set as true (same as default behavior). Assert FALSE tests', t => {
+	t.false(isAbsoluteUrl('yhttp://sindresorhus.com', true));
 	t.false(isAbsoluteUrl('file://sindresorhus.com', true));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', true));
 	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', true));
@@ -40,7 +42,7 @@ test('HttpOnly set as true (same as default behavior). Assert FALSE tests', t =>
 	t.false(isAbsoluteUrl('c:\\', true));
 	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', true));
 	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', true));
-	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', true));
+	t.false(isAbsoluteUrl('h t,tp://sindresorhus.com', true));
 	// eslint-disable-line no-script-url
 	t.false(isAbsoluteUrl('javascript:throw%20document.cookie', true));
 });
@@ -55,9 +57,11 @@ test('HttpOnly set as False. Assert TRUE tests', t => {
 	t.true(isAbsoluteUrl('https://www.sindresorhus.com', false));
 	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', false));
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', false));
-	t.true(isAbsoluteUrl('https://sindresorhus', false));	// Should this behavior exist? missing TLD?
 	// eslint-disable-line no-script-url
 	t.true(isAbsoluteUrl('javascript:throw%20document.cookie', false));
+
+	t.true(isAbsoluteUrl('https://sindresorhus', false));	// Should this behavior exist? missing TLD?...
+	t.true(isAbsoluteUrl('http://sindr esorhus.com', false));// ...because this can happen
 });
 
 test('HttpOnly set as False. Assert FALSE tests', t => {
