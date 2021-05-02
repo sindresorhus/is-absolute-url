@@ -1,7 +1,8 @@
 /**
 Check if a URL is absolute.
+
 @param url - The URL to check.
-@param options - Object with different parameters to check.
+@param httpOnly - checks if is absolute Web URL (default: true)
 
 @example
 ```
@@ -17,10 +18,7 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 */
-interface Options {
-    httpOnly?: boolean | string;
-  }
 
-declare function isAbsoluteUrl(url: string, options: Options): boolean;
+declare function isAbsoluteUrl(url: string, httpOnly: boolean): boolean;
 
 export = isAbsoluteUrl;

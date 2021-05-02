@@ -25,21 +25,24 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 
-## Options
+##### httpOnly
 
-### httpOnly
+Type: `boolean`
+Default: `true`
 
-You can pass an object as a second parameter.
+Check if a URL is a http URL. Defaults to `true`.
 
 ```js
-isAbsoluteUrl('https://si', { httpOnly: true });
+isAbsoluteUrl('https://si', true);
 //=> true
 
-is absoluteUrl('mailto:someone@example.com', { httpOnly: true });
-//=> false
+isabsoluteUrl('mailto:someone@example.com', false);
+//=> true
+  
+isabsoluteUrl('data:text/plain;base64,SGV', false);
+//=> true
 ```
 
-You can also set the `httpOnly` to `strictest` or `strict`. Check the tests for examples.
 
 ## Related
 

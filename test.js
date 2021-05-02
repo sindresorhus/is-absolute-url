@@ -5,10 +5,9 @@ test('main', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com'));
 	t.true(isAbsoluteUrl('https://sindresorhus.com'));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com'));
-	t.true(isAbsoluteUrl('httpS://sindresorhus'));
-	t.true(isAbsoluteUrl('file://sindresorhus.com'));
-	t.true(isAbsoluteUrl('mailto:someone@example.com'));
-	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'));
+	t.false(isAbsoluteUrl('file://sindresorhus.com'));
+	t.false(isAbsoluteUrl('mailto:someone@example.com'));
+	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'));
 	t.false(isAbsoluteUrl('//sindresorhus.com'));
 	t.false(isAbsoluteUrl('/foo/bar'));
 	t.false(isAbsoluteUrl('foo/bar'));
@@ -19,137 +18,50 @@ test('main', t => {
 	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com'));
 });
 
-test('HttpOnly as "strictest"', t => {
-	t.true(isAbsoluteUrl('https://www.sindresorhus.com', {httpOnly: 'strictest'}));
-	t.true(isAbsoluteUrl('https://www.sindresorhus.com/path/to/file', {httpOnly: 'strictest'}));
-	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: 'strictest'}));
-	// New test
-	t.false(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('foo/bar', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('foo', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('c:\\', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: 'strictest'}));
+test('HttpOnly set as true, same behaviour as not passing the httpOnly parameter', t => {
+	t.true(isAbsoluteUrl('http://sindresorhus.com', true));
+	t.true(isAbsoluteUrl('https://sindresorhus.com', true));
+	t.true(isAbsoluteUrl('httpS://sindresorhus.com', true));
+	t.false(isAbsoluteUrl('file://sindresorhus.com', true));
+	t.false(isAbsoluteUrl('mailto:someone@example.com', true));
+	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', true));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', true));
+	t.true(isAbsoluteUrl('https://www.sindresorhus.com', true));
+	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', true));
+	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', true));
+	t.false(isAbsoluteUrl('//sindresorhus.com', true));
+	t.false(isAbsoluteUrl('/foo/bar', true));
+	t.false(isAbsoluteUrl('foo/bar', true));
+	t.false(isAbsoluteUrl('foo', true));
+	t.false(isAbsoluteUrl('c:\\', true));
+	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', true));
+	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', true));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', true));
+	t.true(isAbsoluteUrl('https://sindresorhus', true));	// Should this behavior exist? missing TLD?
+	// eslint-disable-line no-script-url
+	t.false(isAbsoluteUrl('javascript:throw%20document.cookie', true));
 });
 
-test('HttpOnly as "strict"', t => {
-	t.true(isAbsoluteUrl('https://www.sindresorhus.com', {httpOnly: 'strict'}));
-	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: 'strict'}));
-	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: 'strict'}));
-	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'strict'}));
-	// New test
-	t.false(isAbsoluteUrl('httpS://sindresorhus', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'strictest'}));
-	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('foo/bar', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('foo', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('c:\\', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: 'strict'}));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: 'strict'}));
-	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: 'strict'}));
+test('HttpOnly set as False', t => {
+	t.true(isAbsoluteUrl('http://sindresorhus.com', false));
+	t.true(isAbsoluteUrl('https://sindresorhus.com', false));
+	t.true(isAbsoluteUrl('httpS://sindresorhus.com', false));
+	t.true(isAbsoluteUrl('file://sindresorhus.com', false));
+	t.true(isAbsoluteUrl('mailto:someone@example.com', false));
+	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', false));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', false));
+	t.true(isAbsoluteUrl('https://www.sindresorhus.com', false));
+	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', false));
+	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', false));
+	t.false(isAbsoluteUrl('//sindresorhus.com', false));
+	t.false(isAbsoluteUrl('/foo/bar', false));
+	t.false(isAbsoluteUrl('foo/bar', false));
+	t.false(isAbsoluteUrl('foo', false));
+	t.false(isAbsoluteUrl('c:\\', false));
+	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', false));
+	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', false));
+	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', false));
+	t.true(isAbsoluteUrl('https://sindresorhus', false));	// Should this behavior exist? missing TLD?
+	// eslint-disable-line no-script-url
+	t.true(isAbsoluteUrl('javascript:throw%20document.cookie', false));
 });
-
-test('HttpOnly as "loose"', t => {
-	t.true(isAbsoluteUrl('https://www.sindresorhus.com', {httpOnly: 'loose'}));
-	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: 'loose'}));
-	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: 'loose'}));
-	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: 'loose'}));
-	// New test
-	t.true(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('foo/bar', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('foo', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('c:\\', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: 'loose'}));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: 'loose'}));
-	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: 'loose'}));
-});
-
-test('HttpOnly as \'true\'', t => {
-	t.true(isAbsoluteUrl('https://www.sindresorhus.com', {httpOnly: true}));
-	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: true}));
-	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: true}));
-	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: true}));
-	// New test
-	t.true(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: true}));
-	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: true}));
-	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: true}));
-	t.false(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: true}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: true}));
-	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: true}));
-	t.false(isAbsoluteUrl('foo/bar', {httpOnly: true}));
-	t.false(isAbsoluteUrl('foo', {httpOnly: true}));
-	t.false(isAbsoluteUrl('c:\\', {httpOnly: true}));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: true}));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: true}));
-	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: true}));
-});
-
-test('httpOnly option set to false should have same behaviour has "main" tests', t => {
-	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: false}));
-	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: false}));
-	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: false}));
-	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: false}));
-	t.true(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false}));
-	// New test
-	t.true(isAbsoluteUrl('httpS://www.sindresorhus', {httpOnly: false}));
-	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {httpOnly: false}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: false}));
-	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: false}));
-	t.false(isAbsoluteUrl('foo/bar', {httpOnly: false}));
-	t.false(isAbsoluteUrl('foo', {httpOnly: false}));
-	t.false(isAbsoluteUrl('c:\\', {httpOnly: false}));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: false}));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: false}));
-	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', {httpOnly: false}));
-});
-
-test('Testing with different / weird props on Options object', t => {
-	t.true(isAbsoluteUrl('http://sindresorhus.com', {randomKey: false}));
-	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnlyxx: false}));
-	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOn: 2}));
-	t.true(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: 'true'}));
-	t.true(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false, safas: 2}));
-	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {null: false}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {}));
-	// XO doesn't allow to test it -> t.false(isAbsoluteUrl('/foo/bar', {httpOnly: true, httpOnly: false})); //
-	t.false(isAbsoluteUrl('foo/bar', {httpOnly: false}));
-	t.false(isAbsoluteUrl('foo', {httpOnly: false}));
-	// XO t.false(isAbsoluteUrl('c:\\', () => {console.log("hello!")} ));
-	// XO t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: () => {t.false(isAbsoluteUrl('c:\\Dev\\test-broken'))} }));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: '"'}));
-	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', [true, true]));
-});
-
-test('Just a confirmation that it also works with empty objects', t => {
-	t.true(isAbsoluteUrl('http://sindresorhus.com', {}));
-	t.true(isAbsoluteUrl('https://sindresorhus.com', {}));
-	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {}));
-	t.true(isAbsoluteUrl('file://sindresorhus.com', {}));
-	t.true(isAbsoluteUrl('mailto:someone@example.com', {}));
-	t.true(isAbsoluteUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D', {}));
-	t.false(isAbsoluteUrl('//sindresorhus.com', {}));
-	t.false(isAbsoluteUrl('/foo/bar', {}));
-	t.false(isAbsoluteUrl('foo/bar', {}));
-	t.false(isAbsoluteUrl('foo', {}));
-	t.false(isAbsoluteUrl('c:\\', {}));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {}));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {}));
-	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', {}));
-});
-
