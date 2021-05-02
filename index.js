@@ -1,6 +1,6 @@
 'use strict';
 
-// httpOnly
+// Param: httpOnly
 // - true : checks http(s) header and correct formatting or URL.
 // - false: checks only accordance with rfc3986
 
