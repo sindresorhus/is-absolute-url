@@ -6,7 +6,7 @@ module.exports = (url, options = {httpOnly: true}) => {
 	}
 
 	if (options.httpOnly) {
-		return /^((((http([s])?)?:\/\/)(www\.)?)([-a-z0-9()@:%_.~#?&//=]*))/gi.test(url);
+		return /^((http[s]?)?:\/\/([-a-z0-9()@:%_.~#?&//=]*))/gi.test(url);
 	}
 
 	// Don't match Windows paths `c:\`

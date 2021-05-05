@@ -2,7 +2,6 @@
 Check if a URL is absolute.
 
 @param url - The URL to check.
-@param httpOnly - checks if is absolute Web URL (default: true)
 
 @example
 ```
@@ -16,9 +15,20 @@ isAbsoluteUrl('//sindresorhus.com');
 
 isAbsoluteUrl('foo/bar');
 //=> false
+
+isAbsoluteUrl('file://sindresorhus.com', {httpOnly: false});
+//=> true
 ```
 */
+interface Options {
+	/**
+	Check if it's an absolute HTTP URL
 
-declare function isAbsoluteUrl(url: string, httpOnly: boolean): boolean;
+	@default true
+	*/
+	readonly httpOnly?: boolean;
+}
+
+declare function isAbsoluteUrl(url: string, httpOnly?: Options): boolean;
 
 export = isAbsoluteUrl;

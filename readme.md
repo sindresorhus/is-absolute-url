@@ -25,21 +25,23 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 
-##### httpOnly
+### Options
 
-Type: `boolean`
+#### httpOnly
+
+Type: `boolean`\
 Default: `true`
 
-Check if a URL is a http URL. Defaults to `true`.
+Check for the HTTP protocol in a URL.
 
 ```js
-isAbsoluteUrl('https://si', true);
+isAbsoluteUrl('https://si', {httpOnly: true});
 //=> true
 
-isabsoluteUrl('mailto:someone@example.com', false);
+isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false});
 //=> true
-  
-isabsoluteUrl('data:text/plain;base64,SGV', false);
+
+isAbsoluteUrl('data:text/plain;base64,SGV', {httpOnly: false});
 //=> true
 ```
 

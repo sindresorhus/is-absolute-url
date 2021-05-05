@@ -18,18 +18,18 @@ test('main', t => {
 	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com'));
 });
 
-test('HttpOnly set as true (same as default behavior). Assert TRUE tests', t => {
+test('{httpOnly: true}. Assert true', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://www.sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', {httpOnly: true}));
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: true}));
-	t.true(isAbsoluteUrl('https://sindresorhus', {httpOnly: true}));	// Should this behavior exist? missing TLD?
+	t.true(isAbsoluteUrl('https://sindresorhus', {httpOnly: true}));
 	t.true(isAbsoluteUrl('http://sin dresorhus.com', {httpOnly: true}));
 });
 
-test('HttpOnly set as true (same as default behavior). Assert FALSE tests', t => {
+test('{httpOnly: true}. Assert false', t => {
 	t.false(isAbsoluteUrl('yhttp://sindresorhus.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: true}));
@@ -43,10 +43,10 @@ test('HttpOnly set as true (same as default behavior). Assert FALSE tests', t =>
 	t.false(isAbsoluteUrl('c:\\Dev\\test-broken', {httpOnly: true}));
 	t.false(isAbsoluteUrl('C:\\Dev\\test-broken', {httpOnly: true}));
 	t.false(isAbsoluteUrl('h t,tp://sindresorhus.com', {httpOnly: true}));
-	// T t.false(isAbsoluteUrl('javascript:throw%20document.cookie', true));
+	t.false(isAbsoluteUrl('javascript:throw%20document.cookie', {httpOnly: true}));
 });
 
-test('HttpOnly set as False. Assert TRUE tests', t => {
+test('{httpOnly: false}. Assert true', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: false}));
@@ -56,13 +56,12 @@ test('HttpOnly set as False. Assert TRUE tests', t => {
 	t.true(isAbsoluteUrl('https://www.sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', {httpOnly: false}));
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: false}));
-	// T t.true(isAbsoluteUrl('javascript:throw%20document.cookie', false));
-
-	t.true(isAbsoluteUrl('https://sindresorhus', {httpOnly: false}));	// Should this behavior exist? missing TLD?...
-	t.true(isAbsoluteUrl('http://sindr esorhus.com', {httpOnly: false}));	// ...because this can happen
+	t.true(isAbsoluteUrl('javascript:throw%20document.cookie', {httpOnly: false}));
+	t.true(isAbsoluteUrl('https://sindresorhus', {httpOnly: false}));
+	t.true(isAbsoluteUrl('http://sindr esorhus.com', {httpOnly: false}));
 });
 
-test('HttpOnly set as False. Assert FALSE tests', t => {
+test('options => {httpOnly: false}. Assert false', t => {
 	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com', {httpOnly: false}));
 	t.false(isAbsoluteUrl('//sindresorhus.com', {httpOnly: false}));
 	t.false(isAbsoluteUrl('/foo/bar', {httpOnly: false}));
