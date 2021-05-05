@@ -26,6 +26,8 @@ test('options => {httpOnly: true}. Assert true', t => {
 	t.true(isAbsoluteUrl('https://www.sindres.orhus.com/path', {httpOnly: true}));
 	t.true(isAbsoluteUrl('httpS://www.sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://sindresorhus', {httpOnly: true}));
+	t.true(isAbsoluteUrl('httpS://localhost:8000', {httpOnly: true}));
+	t.true(isAbsoluteUrl('http://localhost', {httpOnly: true}));
 	t.true(isAbsoluteUrl('http://sin dresorhus.com', {httpOnly: true}));
 });
 
