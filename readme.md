@@ -32,7 +32,7 @@ isAbsoluteUrl('foo/bar');
 Type: `boolean`\
 Default: `true`
 
-Check for the HTTP protocol in a URL.
+Only accept absolute HTTP URLs.
 
 ```js
 isAbsoluteUrl('https://si', {httpOnly: true});
