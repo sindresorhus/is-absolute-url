@@ -1,8 +1,12 @@
 'use strict';
 
-module.exports = url => {
+module.exports = (url, options = {httpOnly: true}) => {
 	if (typeof url !== 'string') {
 		throw new TypeError(`Expected a \`string\`, got \`${typeof url}\``);
+	}
+
+	if (options.httpOnly) {
+		return /^((http[s]?)?:\/\/([-a-z0-9()@:%_.~#?&//=]*))/gi.test(url);
 	}
 
 	// Don't match Windows paths `c:\`

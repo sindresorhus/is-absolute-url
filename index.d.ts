@@ -15,8 +15,20 @@ isAbsoluteUrl('//sindresorhus.com');
 
 isAbsoluteUrl('foo/bar');
 //=> false
+
+isAbsoluteUrl('file://sindresorhus.com', {httpOnly: false});
+//=> true
 ```
 */
-declare function isAbsoluteUrl(url: string): boolean;
+interface Options {
+	/**
+	Check if it's an absolute HTTP URL
+
+	@default true
+	*/
+	readonly httpOnly?: boolean;
+}
+
+declare function isAbsoluteUrl(url: string, httpOnly?: Options): boolean;
 
 export = isAbsoluteUrl;

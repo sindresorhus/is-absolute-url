@@ -25,6 +25,26 @@ isAbsoluteUrl('foo/bar');
 //=> false
 ```
 
+### Options
+
+#### httpOnly
+
+Type: `boolean`\
+Default: `true`
+
+Only accept absolute HTTP URLs.
+
+```js
+isAbsoluteUrl('https://si', {httpOnly: true});
+//=> true
+
+isAbsoluteUrl('mailto:someone@example.com', {httpOnly: false});
+//=> true
+
+isAbsoluteUrl('data:text/plain;base64,SGV', {httpOnly: false});
+//=> true
+```
+
 
 ## Related
 
