@@ -18,7 +18,7 @@ test('main', t => {
 	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com'));
 });
 
-test('{httpOnly: true}. Assert true', t => {
+test('options => {httpOnly: true}. Assert true', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: true}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: true}));
@@ -29,7 +29,7 @@ test('{httpOnly: true}. Assert true', t => {
 	t.true(isAbsoluteUrl('http://sin dresorhus.com', {httpOnly: true}));
 });
 
-test('{httpOnly: true}. Assert false', t => {
+test('options => {httpOnly: true}. Assert false', t => {
 	t.false(isAbsoluteUrl('yhttp://sindresorhus.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('file://sindresorhus.com', {httpOnly: true}));
 	t.false(isAbsoluteUrl('mailto:someone@example.com', {httpOnly: true}));
@@ -46,7 +46,7 @@ test('{httpOnly: true}. Assert false', t => {
 	t.false(isAbsoluteUrl('javascript:throw%20document.cookie', {httpOnly: true}));
 });
 
-test('{httpOnly: false}. Assert true', t => {
+test('options => {httpOnly: false}. Assert true', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('https://sindresorhus.com', {httpOnly: false}));
 	t.true(isAbsoluteUrl('httpS://sindresorhus.com', {httpOnly: false}));
