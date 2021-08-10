@@ -1,4 +1,4 @@
 import {expectType} from 'tsd';
-import isAbsoluteUrl = require('.');
+import isAbsoluteUrl from './index.js';
 
 expectType<boolean>(isAbsoluteUrl('https://sindresorhus.com/foo/bar'));

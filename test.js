@@ -1,5 +1,5 @@
 import test from 'ava';
-import isAbsoluteUrl from '.';
+import isAbsoluteUrl from './index.js';
 
 test('main', t => {
 	t.true(isAbsoluteUrl('http://sindresorhus.com'));
