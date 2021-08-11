@@ -1,6 +1,6 @@
 {
 	"name": "is-absolute-url",
-	"version": "4.0.0",
+	"version": "4.0.1",
 	"description": "Check if a URL is absolute",
 	"license": "MIT",
 	"repository": "sindresorhus/is-absolute-url",
