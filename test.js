@@ -13,7 +13,7 @@ test('main', t => {
 	t.false(isAbsoluteUrl('foo/bar'));
 	t.false(isAbsoluteUrl('foo'));
 	t.false(isAbsoluteUrl('c:\\'));
-	t.false(isAbsoluteUrl('c:\\Dev\\test-broken'));
-	t.false(isAbsoluteUrl('C:\\Dev\\test-broken'));
+	t.false(isAbsoluteUrl(String.raw`c:\Dev\test-broken`));
+	t.false(isAbsoluteUrl(String.raw`C:\Dev\test-broken`));
 	t.false(isAbsoluteUrl('ht,tp://sindresorhus.com'));
 });
