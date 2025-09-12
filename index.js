@@ -5,7 +5,10 @@ const ABSOLUTE_URL_REGEX = /^[a-zA-Z][a-zA-Z\d+\-.]*?:/;
 // Windows paths like `c:\`
 const WINDOWS_PATH_REGEX = /^[a-zA-Z]:\\/;
 
-export default function isAbsoluteUrl(url) {
+// HTTP(S) protocols only for maximum security
+const HTTP_PROTOCOLS_REGEX = /^https?:/i;
+
+export default function isAbsoluteUrl(url, options = {}) {
 	if (typeof url !== 'string') {
 		throw new TypeError(`Expected a \`string\`, got \`${typeof url}\``);
 	}
@@ -14,5 +17,18 @@ export default function isAbsoluteUrl(url) {
 		return false;
 	}
 
-	return ABSOLUTE_URL_REGEX.test(url);
+	if (!ABSOLUTE_URL_REGEX.test(url)) {
+		return false;
+	}
+
+	// Default httpOnly to true for security
+	const {httpOnly = true} = options;
+
+	// When httpOnly is false, allow any absolute URL
+	if (!httpOnly) {
+		return true;
+	}
+
+	// When httpOnly is true, only allow HTTP(S) protocols
+	return HTTP_PROTOCOLS_REGEX.test(url);
 }
